@@ -1,0 +1,73 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Add new Performer to Song</title>
+    <style type = "text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+        table {
+            width:100%;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding:3px 2px;
+        }
+        section {
+            float: left;
+            margin: 0 1.5%;
+            width: 63%;
+        }
+        aside {
+            float: right;
+            margin: 0 1.5%;
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Select the Artist to add to the List of Performers </h1>
+</header>
+<section>
+<!--        <form th:action="@{/artists}" th:method="GET">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Filter by first name">
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Filter by last name">
+
+            <label for="bio">Bio:</label>
+            <input type="text" id="bio" name="bio" placeholder="Filter by bio">
+
+            <input type="hidden" name="trackId" th:value="${song.trackId}">
+            <button type="submit">Filter</button>
+        </form>-->
+
+    <!-- Make changes to this code to dynamically display radio buttons for each artist as in the example -->
+    <form th:action="@{/songDetails/{id}(id=${song.trackId})}" th:method="GET">
+        <h2>Select artist:</h2>
+        <div>
+            <ul>
+                <li th:each="artist : ${artists}" style="list-style-type: none">
+                    <input type="radio" name="artistId" th:value="${artist.id}" required>
+                    <span th:text="${artist.firstName} + ' ' + ${artist.lastName}"></span>
+                </li>
+            </ul>
+        </div>
+        <!--<input type="hidden" name="trackId" th:value="${song.trackId}"/>-->
+        <input type="submit" value="Add artist">
+    </form>
+</section>
+<aside>
+    <table>
+        <tr>
+            <!-- change to show selected trackId -->
+            <td><b>Track Id</b></td>
+            <td th:text="${song.trackId}"></td>
+        </tr>
+    </table>
+</aside>
+</body>
+</html>
