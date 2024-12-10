@@ -4,7 +4,6 @@ import mk.ukim.finki.wp.lab.model.Album;
 import mk.ukim.finki.wp.lab.model.Artist;
 import mk.ukim.finki.wp.lab.model.Song;
 import mk.ukim.finki.wp.lab.model.exceptions.SongNotFoundException;
-import mk.ukim.finki.wp.lab.repository.jpa.ArtistRepository;
 import mk.ukim.finki.wp.lab.repository.jpa.SongRepository;
 import mk.ukim.finki.wp.lab.service.SongService;
 import org.springframework.stereotype.Service;
@@ -15,13 +14,11 @@ import java.util.Optional;
 @Service
 public class SongServiceImpl implements SongService {
     private final SongRepository songRepository;
-    private final ArtistRepository artistRepository;
 
 
 
-    public SongServiceImpl(SongRepository  songRepository, ArtistRepository artistRepository) {
+    public SongServiceImpl(SongRepository  songRepository) {
         this.songRepository = songRepository;
-        this.artistRepository = artistRepository;
     }
 
     @Override
