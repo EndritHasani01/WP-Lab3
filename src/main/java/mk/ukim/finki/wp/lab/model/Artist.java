@@ -23,6 +23,11 @@ public class Artist {
     private List<Album> albums;
     */
 
+    /*
+    * @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, orphanRemoval = true)
+    * private List<Song> songs = new ArrayList<>();
+     */
+
     public Artist(String firstName, String lastName, String bio) {
         /*this.id = (long) (Math.random()*1000);*/
         this.firstName = firstName;
@@ -31,3 +36,44 @@ public class Artist {
     }
 
 }
+
+/*
+@Entity
+public class Artist {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Artwork> artworks = new ArrayList<>();
+
+    // getters and setters
+
+    public void addArtwork(Artwork artwork) {
+        this.artworks.add(artwork);
+        artwork.setArtist(this);  // Ensure both sides are synchronized
+    }
+}
+
+@Entity
+public class Artwork {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+
+    @ManyToOne
+    @JoinColumn(name = "artist_id")
+    private Artist artist;
+
+    // getters and setters
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+    }
+}
+
+*/
