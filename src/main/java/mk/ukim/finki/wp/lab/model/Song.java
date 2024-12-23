@@ -15,7 +15,6 @@ public class Song {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long trackId;
     private String title;
-    private String genre;
     private int releaseYear;
     @ManyToMany
     private List<Artist> performers;
@@ -23,7 +22,10 @@ public class Song {
     @ManyToOne
     private Album album;
 
-    public Song(String title, String genre, int releaseYear, Album album) {
+    @ManyToOne
+    private Genre genre;
+
+    public Song(String title, Genre genre, int releaseYear, Album album) {
         /*this.trackId = (long) (Math.random()*1000);*/
         this.title = title;
         this.genre = genre;

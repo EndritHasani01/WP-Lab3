@@ -14,13 +14,25 @@ public class Album {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String genre;
+
     private String releaseYear;
 
     @OneToMany(mappedBy = "album")
     private List<Song> songs;
 
-    /*@JoinColumn(name = "album_id")*/
+    @ManyToOne
+    private Genre genre;
+
+    public Album(String name, Genre genre, String releaseYear) {
+        /*this.id = (long) (Math.random()*1000);*/
+        this.name = name;
+        this.genre = genre;
+        this.releaseYear = releaseYear;
+    }
+}
+
+
+/*@JoinColumn(name = "album_id")*/
 
     /*
     @ManyToMany
@@ -31,10 +43,3 @@ public class Album {
     )
     private List<Artist> artists;
     */
-    public Album(String name, String genre, String releaseYear) {
-        /*this.id = (long) (Math.random()*1000);*/
-        this.name = name;
-        this.genre = genre;
-        this.releaseYear = releaseYear;
-    }
-}

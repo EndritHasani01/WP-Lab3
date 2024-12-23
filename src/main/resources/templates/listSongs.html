@@ -1,15 +1,5 @@
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Songs Homepage - Welcome to My Music Store</title>
-    <style type="text/css">
-        body {
-            width: 800px;
-            margin: auto;
-        }
-    </style>
-</head>
-<body>
+<div xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <header>
     <h1>Welcome to My Music Store</h1>
 </header>
@@ -18,7 +8,7 @@
             the value should be the trackId
             and the displayed text should be Title: <songTitle>, Genre:<genre>, Release Year: <releaseYear> -->
 
-    <a th:href="@{/songs/add-form}">
+    <a th:href="@{/songs/add-form}" sec:authorize="hasRole('ROLE_ADMIN')">
         <button type="button">Add New Song</button>
     </a>
 
@@ -30,15 +20,17 @@
                 <li th:each="song: ${songs}" style="list-style-type: none">
                     <input type="radio" name="trackId" th:value="${song.getTrackId()}" required>
                     Title: <span th:text="${song.getTitle()}"></span>,
-                    Genre: <span th:text="${song.getGenre()}"></span>,
+                    Genre: <span
+                        th:if="${song.getGenre()} != null"
+                        th:text="${song.getGenre().getName()}"></span>,
                     Release Year: <span th:text="${song.getReleaseYear()}"></span>
                     Album: <span th:text="${song.getAlbum().getName()}"></span>
 
-                    <a th:href="@{/songs/delete/{id}(id=${song.trackId})}">
+                    <a th:href="@{/songs/delete/{id}(id=${song.trackId})}" sec:authorize="hasRole('ROLE_ADMIN')">
                         <button type="button">Delete song</button>
                     </a>
 
-                    <a th:href="@{/songs/edit-form/{id}(id=${song.trackId})}">
+                    <a th:href="@{/songs/edit-form/{id}(id=${song.trackId})}" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')">
                         <button type="button">Edit song</button>
                     </a>
                 </li>
@@ -49,8 +41,8 @@
     </form>
 
 </main>
-</body>
-</html>
+
+</div>
 
 <!--<!DOCTYPE html>-->
 <!--<html>-->

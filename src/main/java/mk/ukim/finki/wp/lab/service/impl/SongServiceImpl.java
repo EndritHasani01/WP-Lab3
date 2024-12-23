@@ -2,6 +2,7 @@ package mk.ukim.finki.wp.lab.service.impl;
 
 import mk.ukim.finki.wp.lab.model.Album;
 import mk.ukim.finki.wp.lab.model.Artist;
+import mk.ukim.finki.wp.lab.model.Genre;
 import mk.ukim.finki.wp.lab.model.Song;
 import mk.ukim.finki.wp.lab.model.exceptions.SongNotFoundException;
 import mk.ukim.finki.wp.lab.repository.jpa.SongRepository;
@@ -45,14 +46,14 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public Optional<Song> save(String title, String genre, Integer releaseYear, Album album) {
+    public Optional<Song> save(String title, Genre genre, Integer releaseYear, Album album) {
         Song song = new Song(title, genre, releaseYear, album);
         return Optional.of(songRepository.save(song));
         //return songRepository.save(title, genre, releaseYear, album);
     }
 
     @Override
-    public Optional<Song> update(Long trackId, String title, String genre, Integer releaseYear, Album album) {
+    public Optional<Song> update(Long trackId, String title, Genre genre, Integer releaseYear, Album album) {
         Song existingSong  = songRepository.findById(trackId)
                 .orElseThrow(() -> new SongNotFoundException(trackId));
 

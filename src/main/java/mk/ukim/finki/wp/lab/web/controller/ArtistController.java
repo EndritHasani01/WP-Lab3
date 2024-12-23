@@ -40,7 +40,9 @@ public class ArtistController {
         List<Artist> filteredArtists = artistService.searchArtists(firstName, lastName, bio);
         model.addAttribute("artists",filteredArtists);
         model.addAttribute("song",songService.findByTrackId(trackId));
-        return "artistsList";
+
+        model.addAttribute("bodyContent","artistsList");
+        return "master-template";
     }
 
 }

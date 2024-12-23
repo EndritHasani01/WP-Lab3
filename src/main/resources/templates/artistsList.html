@@ -1,32 +1,4 @@
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Add new Performer to Song</title>
-    <style type = "text/css">
-        body {
-            width: 800px;
-            margin: auto;
-        }
-        table {
-            width:100%;
-        }
-        table, td, th {
-            border: 1px solid black;
-            padding:3px 2px;
-        }
-        section {
-            float: left;
-            margin: 0 1.5%;
-            width: 63%;
-        }
-        aside {
-            float: right;
-            margin: 0 1.5%;
-            width: 30%;
-        }
-    </style>
-</head>
-<body>
+<div xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <header>
     <h1>Select the Artist to add to the List of Performers </h1>
 </header>
@@ -57,7 +29,7 @@
             </ul>
         </div>
         <!--<input type="hidden" name="trackId" th:value="${song.trackId}"/>-->
-        <input type="submit" value="Add artist">
+        <input type="submit" value="Add artist" sec:authorize="hasRole('ROLE_ADMIN')">
     </form>
 </section>
 <aside>
@@ -69,5 +41,4 @@
         </tr>
     </table>
 </aside>
-</body>
-</html>
+</div>
